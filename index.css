@@ -1,0 +1,63 @@
+body {
+    margin: 0;
+}
+
+#pages>* {
+    display: none;
+}
+
+#welcomePage {
+    display: block;
+    text-align: center;
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+}
+
+#enterFormButton {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+}
+
+#formPage {
+    text-align: center;
+    white-space: nowrap;
+}
+
+#formPage>img:first-child {
+    width: 100%;
+    height: 15vh;
+    object-fit: cover;
+}
+
+.mdc-list-item>.mdc-list-item__text {
+    line-height: 48px;
+    overflow: hidden;
+}
+
+.mdc-list-item>.mdc-icon-button {
+    margin-left: auto;
+}
+
+#formActionContainer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    padding: 16px 0;
+    text-align: center;
+    background-color: white;
+}
+
+#finishPage {
+    /*display: flex;*/
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+}

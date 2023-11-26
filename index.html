@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Achobeta招新系统</title>
+
+    <link rel="stylesheet" href="material/material-components-web.min.css">
+    <link rel="stylesheet" href="material/icon.css">
+    <script src="material/material-components-web.min.js"></script>
+
+    <link rel="stylesheet" href="index.css">
+
+</head>
+
+<body>
+
+    <div id="pages">
+        <div id="welcomePage">
+
+            <button id="enterFormButton" class="mdc-button mdc-button--raised" style="background-color: coral;" onclick="
+                    location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx061e13206be82d88&redirect_uri=http://ab.haojiezhe12345.top:8090/&response_type=code&scope=snsapi_userinfo#wechat_redirect`;
+                    //location.reload()
+                ">
+                <div class="mdc-button__ripple"></div>
+                <span class="mdc-button__label">立即投递</span>
+            </button>
+
+        </div>
+
+        <div id="formPage">
+
+            <img id="formHeaderImg">
+
+            <h1 class="mdc-typography mdc-typography--headline5">AchoBeta实验室<br>简历投递</h1>
+
+            <span id="wxcode" style="white-space: normal; overflow: auto; display: none;"></span>
+
+            <p class="mdc-typography mdc-typography--body1">投递状态：<span id="status">未知</span></p>
+
+            <div style="display: inline-block; width: 100%; max-width: 640px;">
+
+                <label id="stuID" class="mdc-text-field mdc-text-field--filled mdc-text-field--with-leading-icon"
+                    style="width: 48%; margin-right: 2%;">
+                    <span class="mdc-text-field__ripple"></span>
+                    <span class="mdc-floating-label">学号</span>
+                    <i class="material-icons mdc-text-field__icon mdc-text-field__icon--leading">numbers</i>
+                    <input type="number" class="mdc-text-field__input" required>
+                    <span class="mdc-line-ripple"></span>
+                </label>
+
+                <div style="width: 30%; margin-left: -0.25em; display: inline-table;">
+                    <label id="stuGrade" class="mdc-text-field mdc-text-field--filled" style="width: 100%;">
+                        <span class="mdc-text-field__ripple"></span>
+                        <input type="number" class="mdc-text-field__input" min="2010" max="2030" required>
+                        <span class="mdc-floating-label">年级</span>
+                        <span class="mdc-line-ripple"></span>
+                    </label>
+                    <div class="mdc-text-field-helper-line" style="max-width: 30vw;">
+                        <div class="mdc-text-field-helper-text mdc-text-field-helper-text--validation-msg"
+                            aria-hidden="true">
+                            年份错误
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+
+                <label id="stuName" class="mdc-text-field mdc-text-field--filled mdc-text-field--with-leading-icon"
+                    style="width: 48%; margin-right: 2%;">
+                    <span class="mdc-text-field__ripple"></span>
+                    <span class="mdc-floating-label">姓名</span>
+                    <i class="material-icons mdc-text-field__icon mdc-text-field__icon--leading">person</i>
+                    <input type="text" class="mdc-text-field__input" required>
+                    <span class="mdc-line-ripple"></span>
+                </label>
+
+                <div id="stuGender" class="mdc-select mdc-select--filled demo-width-class"
+                    style="width: 30%; margin-left: -0.25em;">
+                    <div class="mdc-select__anchor" role="button" aria-haspopup="listbox" aria-expanded="false">
+                        <span class="mdc-select__ripple"></span>
+                        <span id="demo-label" class="mdc-floating-label">性别</span>
+                        <span class="mdc-select__selected-text-container">
+                            <span id="demo-selected-text" class="mdc-select__selected-text"></span>
+                        </span>
+                        <span class="mdc-select__dropdown-icon">
+                            <svg class="mdc-select__dropdown-icon-graphic" viewBox="7 10 10 5" focusable="false">
+                                <polygon class="mdc-select__dropdown-icon-inactive" stroke="none" fill-rule="evenodd"
+                                    points="7 10 12 15 17 10">
+                                </polygon>
+                                <polygon class="mdc-select__dropdown-icon-active" stroke="none" fill-rule="evenodd"
+                                    points="7 15 12 10 17 15">
+                                </polygon>
+                            </svg>
+                        </span>
+                        <span class="mdc-line-ripple"></span>
+                    </div>
+                    <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
+                        <ul class="mdc-deprecated-list" role="listbox">
+                            <li class="mdc-deprecated-list-item" aria-selected="false" data-value="男" role="option">
+                                <span class="mdc-deprecated-list-item__ripple"></span>
+                                <span class="mdc-deprecated-list-item__text">男</span>
+                            </li>
+                            <li class="mdc-deprecated-list-item" aria-selected="false" data-value="女" role="option">
+                                <span class="mdc-deprecated-list-item__ripple"></span>
+                                <span class="mdc-deprecated-list-item__text">女</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <br><br>
+
+                <label id="stuPro" class="mdc-text-field mdc-text-field--filled mdc-text-field--with-leading-icon"
+                    style="width: 48%; margin-right: 2%;">
+                    <span class="mdc-text-field__ripple"></span>
+                    <span class="mdc-floating-label">专业</span>
+                    <i class="material-icons mdc-text-field__icon mdc-text-field__icon--leading">work</i>
+                    <input type="text" class="mdc-text-field__input" required>
+                    <span class="mdc-line-ripple"></span>
+                </label>
+
+                <label id="stuClass" class="mdc-text-field mdc-text-field--filled"
+                    style="width: 30%; margin-left: -0.25em;">
+                    <span class="mdc-text-field__ripple"></span>
+                    <input type="number" class="mdc-text-field__input" required>
+                    <span class="mdc-floating-label">班号</span>
+                    <span class="mdc-line-ripple"></span>
+                </label>
+
+                <br><br>
+
+                <label id="stuPhone" class="mdc-text-field mdc-text-field--filled mdc-text-field--with-leading-icon"
+                    style="width: 80%;">
+                    <span class="mdc-text-field__ripple"></span>
+                    <span class="mdc-floating-label">手机号码</span>
+                    <i class="material-icons mdc-text-field__icon mdc-text-field__icon--leading">call</i>
+                    <input type="number" class="mdc-text-field__input" min="10000000000" max="99999999999" required>
+                    <span class="mdc-line-ripple"></span>
+                </label>
+                <div class="mdc-text-field-helper-line" style="width: 80%; margin: 0 10%;">
+                    <div class="mdc-text-field-helper-text mdc-text-field-helper-text--validation-msg"
+                        aria-hidden="true">
+                        手机号格式错误
+                    </div>
+                </div>
+
+                <label id="stuWeChat" class="mdc-text-field mdc-text-field--filled mdc-text-field--with-leading-icon"
+                    style="width: 80%;">
+                    <span class="mdc-text-field__ripple"></span>
+                    <span class="mdc-floating-label">微信号</span>
+                    <i class="material-icons mdc-text-field__icon mdc-text-field__icon--leading">forum</i>
+                    <input type="text" class="mdc-text-field__input" required>
+                    <span class="mdc-line-ripple"></span>
+                </label>
+
+                <br><br>
+
+                <label id="stuIntro1" class="mdc-text-field mdc-text-field--filled mdc-text-field--textarea"
+                    style="width: 80%;">
+                    <span class="mdc-text-field__ripple"></span>
+                    <span class="mdc-floating-label">个人介绍1</span>
+                    <span class="mdc-text-field__resizer">
+                        <textarea class="mdc-text-field__input" rows="8" cols="40" placeholder="个人介绍1"
+                            required></textarea>
+                    </span>
+                    <span class="mdc-line-ripple"></span>
+                </label>
+
+                <br><br>
+
+                <label id="stuIntro2" class="mdc-text-field mdc-text-field--filled mdc-text-field--textarea"
+                    style="width: 80%;">
+                    <span class="mdc-text-field__ripple"></span>
+                    <span class="mdc-floating-label">个人介绍2</span>
+                    <span class="mdc-text-field__resizer">
+                        <textarea class="mdc-text-field__input" rows="8" cols="40" placeholder="个人介绍2"></textarea>
+                    </span>
+                    <span class="mdc-line-ripple"></span>
+                </label>
+
+                <br><br>
+
+                <label id="stuIntro3" class="mdc-text-field mdc-text-field--filled mdc-text-field--textarea"
+                    style="width: 80%;">
+                    <span class="mdc-text-field__ripple"></span>
+                    <span class="mdc-floating-label">个人介绍3</span>
+                    <span class="mdc-text-field__resizer">
+                        <textarea class="mdc-text-field__input" rows="8" cols="40" placeholder="个人介绍3"></textarea>
+                    </span>
+                    <span class="mdc-line-ripple"></span>
+                </label>
+
+                <br><br>
+
+                <label id="stuAwards" class="mdc-text-field mdc-text-field--filled mdc-text-field--textarea"
+                    style="width: 80%;">
+                    <span class="mdc-text-field__ripple"></span>
+                    <span class="mdc-floating-label">获奖经历</span>
+                    <span class="mdc-text-field__resizer">
+                        <textarea class="mdc-text-field__input" rows="8" cols="40" placeholder="获奖经历"></textarea>
+                    </span>
+                    <span class="mdc-line-ripple"></span>
+                </label>
+
+                <br><br>
+
+                <div style="width: 100%; padding: 0 25%; box-sizing: border-box; text-align: left;">
+                    <p>
+                        <span class="mdc-typography mdc-typography--headline6"
+                            style="display: inline-block; line-height: 36px;">照片</span>
+                        <label style="float: right;">
+                            <input id="uploadImgPicker" type="file" onchange="previewImg()" style="display: none;" />
+                            <button class="mdc-button mdc-button--raised" onclick="this.parentNode.click()">
+                                <span class="mdc-button__ripple"></span>
+                                <i class="material-icons mdc-button__icon" aria-hidden="true">upload</i>
+                                <span class="mdc-button__label">上传</span>
+                            </button>
+                        </label>
+                    </p>
+
+                    <img id="imgPreview" style="width: 100%; box-shadow: 0px 3px 8px 0px #888;"
+                        src="res/image/dummy.png">
+                </div>
+
+                <div style="width: 100%; padding: 0 11%; margin: 30px 0 0; box-sizing: border-box; text-align: left;">
+                    <p style="margin: 0 0 8px 0">
+                        <span class="mdc-typography mdc-typography--headline6"
+                            style="display: inline-block; line-height: 36px;">附件</span>
+                        <label style="float: right;">
+                            <input id="uploadAttachmentsPicker" type="file" onchange="addAttachments()"
+                                style="display: none;" multiple />
+                            <button class="mdc-button mdc-button--raised" onclick="this.parentNode.click()">
+                                <span class="mdc-button__ripple"></span>
+                                <i class="material-icons mdc-button__icon" aria-hidden="true">upload</i>
+                                <span class="mdc-button__label">上传</span>
+                            </button>
+                        </label>
+                    </p>
+                    <ul id="attachmentsListEl" class="mdc-list" style="width: 100%;">
+                        <!--
+                    <li class="mdc-list-item attachmentEl_">
+                        <span class="mdc-list-item__ripple"></span>
+                        <span class="mdc-list-item__text">example.txt</span>
+                        <button class="mdc-icon-button material-icons attachmentElDelBtn_" onclick="//removeAttachment(0)">
+                            <div class="mdc-icon-button__ripple"></div>
+                            delete
+                        </button>
+                    </li>
+                    -->
+                    </ul>
+                </div>
+
+                <p style="margin: 0 0 30px;" class="mdc-typography mdc-typography--body1">简历模板下载链接：<a
+                        href="res/AchoBeta网安创新实践实验室%20招新报名表模板.docx" target="_blank">点击跳转</a></p>
+
+                <label id="stuNotes" class="mdc-text-field mdc-text-field--filled mdc-text-field--textarea"
+                    style="width: 80%;">
+                    <span class="mdc-text-field__ripple"></span>
+                    <span class="mdc-floating-label">备注</span>
+                    <span class="mdc-text-field__resizer">
+                        <textarea class="mdc-text-field__input" rows="3" cols="40" placeholder="备注"></textarea>
+                    </span>
+                    <span class="mdc-line-ripple"></span>
+                </label>
+
+                <div style="height: 100px;"></div>
+
+            </div>
+
+            <div id="formActionContainer">
+                <button class="mdc-button mdc-button--outlined" style="margin-right: 2%;" onclick="submitForm(false)">
+                    <span class="mdc-button__ripple"></span>
+                    <span class="mdc-button__label">存为草稿</span>
+                </button>
+                <button class="mdc-button mdc-button--raised" onclick="
+                    for ([key, val] of Object.entries(stuInfoEls)) {
+                        if (!stuInfoEls[key].valid) {
+                            console.log(key, stuInfoEls[key].value)
+                            snackbar.close()
+                            snackbar.labelText = '请正确且完整填写表格!'
+                            document.querySelector('.mdc-snackbar').querySelector('.mdc-snackbar__action').setAttribute('onclick', 'submitConfirmDialog.open()')
+                            document.querySelector('.mdc-snackbar').querySelector('.mdc-button__label').innerHTML = '仍要提交'
+                            document.querySelector('.mdc-snackbar').querySelector('.mdc-snackbar__actions').style.removeProperty('display')
+                            snackbar.open()
+                            return
+                        }
+                    }
+                    submitConfirmDialog.open()
+                    ">
+                    <span class="mdc-button__ripple"></span>
+                    <span class="mdc-button__label" id="submitBtnBottomText">提交</span>
+                </button>
+            </div>
+
+        </div>
+
+        <div id="finishPage">
+            <div>
+                <i class="material-icons" style="font-size: 64px; color: limegreen;">done</i>
+                <h1 class="mdc-typography mdc-typography--headline6">提交成功<br>期待与你相遇</h1>
+                <button class="mdc-button mdc-button--outlined" onclick="
+                        document.getElementById('formPage').style.display = 'block'
+                        document.getElementById('finishPage').style.display = 'none'
+                    ">
+                    <span class="mdc-button__ripple"></span>
+                    <span class="mdc-button__label">关闭</span>
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="submitConfirmDialog" class="mdc-dialog">
+        <div class="mdc-dialog__container">
+            <div class="mdc-dialog__surface" role="alertdialog" aria-modal="true" aria-labelledby="my-dialog-title"
+                aria-describedby="my-dialog-content">
+
+                <div class="mdc-dialog__content" id="my-dialog-content">
+                    确认提交?
+                </div>
+
+                <div style="padding: 0 16px 16px; display: none;">
+                    <span class="mdc-typography mdc-typography--body2">Backend address:</span>
+                    <br>
+                    <select id="BEAddress" onchange='
+                        if (this.selectedIndex == 3) {
+                            customBEAddr = window.prompt("Enter the backend address, e.g. \"http\:\/\/myserver.com\"", "http\:\/\/")
+                            if (customBEAddr !== null) {
+                                var el = document.createElement("option")
+                                el.value = customBEAddr
+                                el.innerHTML = customBEAddr
+                                this.appendChild(el)
+                                this.value = customBEAddr
+                            } else {
+                                this.selectedIndex = 0
+                            }
+                        }'>
+                        <option value="api">api/</option>
+                        <option value="http://haojiezhe12345.top:8090/api">haojiezhe12345.top:8090/api/</option>
+                        <option value="http://localhost:8080">localhost:8080</option>
+                        <option>- custom -</option>
+                    </select>
+                </div>
+
+                <div id="submitProgress" style="display: none; align-items: center; padding: 0 16px;">
+
+                    <div class="mdc-circular-progress mdc-circular-progress--indeterminate"
+                        style="width:48px;height:48px;" role="progressbar" aria-label="Example Progress Bar"
+                        aria-valuemin="0" aria-valuemax="1">
+                        <div class="mdc-circular-progress__determinate-container">
+                            <svg class="mdc-circular-progress__determinate-circle-graphic" viewBox="0 0 48 48"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <circle class="mdc-circular-progress__determinate-track" cx="24" cy="24" r="18"
+                                    stroke-width="4" />
+                                <circle class="mdc-circular-progress__determinate-circle" cx="24" cy="24" r="18"
+                                    stroke-dasharray="113.097" stroke-dashoffset="113.097" stroke-width="4" />
+                            </svg>
+                        </div>
+                        <div class="mdc-circular-progress__indeterminate-container">
+                            <div class="mdc-circular-progress__spinner-layer">
+                                <div class="mdc-circular-progress__circle-clipper mdc-circular-progress__circle-left">
+                                    <svg class="mdc-circular-progress__indeterminate-circle-graphic" viewBox="0 0 48 48"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="24" cy="24" r="18" stroke-dasharray="113.097"
+                                            stroke-dashoffset="56.549" stroke-width="4" />
+                                    </svg>
+                                </div>
+                                <div class="mdc-circular-progress__gap-patch">
+                                    <svg class="mdc-circular-progress__indeterminate-circle-graphic" viewBox="0 0 48 48"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="24" cy="24" r="18" stroke-dasharray="113.097"
+                                            stroke-dashoffset="56.549" stroke-width="3.2" />
+                                    </svg>
+                                </div>
+                                <div class="mdc-circular-progress__circle-clipper mdc-circular-progress__circle-right">
+                                    <svg class="mdc-circular-progress__indeterminate-circle-graphic" viewBox="0 0 48 48"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="24" cy="24" r="18" stroke-dasharray="113.097"
+                                            stroke-dashoffset="56.549" stroke-width="4" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <span id="progressText" class="mdc-typography mdc-typography--body2"
+                        style="margin-left: 6px;">…</span>
+
+                </div>
+
+                <div class="mdc-dialog__actions">
+                    <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="cancel">
+                        <div class="mdc-button__ripple"></div>
+                        <span class="mdc-button__label">取消</span>
+                    </button>
+                    <button id="submitBtn" type="button" class="mdc-button mdc-dialog__button mdc-button--raised"
+                        onclick="submitForm(true); this.disabled = true">
+                        <div class="mdc-button__ripple"></div>
+                        <span class="mdc-button__label">确定</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+        <div class="mdc-dialog__scrim"></div>
+    </div>
+
+    <aside class="mdc-snackbar" onclick="snackbar.close()">
+        <div class="mdc-snackbar__surface" role="status" aria-relevant="additions">
+            <div class="mdc-snackbar__label" aria-atomic="false"></div>
+            <div class="mdc-snackbar__actions" aria-atomic="true" style="display: none;">
+                <button type="button" class="mdc-button mdc-snackbar__action">
+                    <div class="mdc-button__ripple"></div>
+                    <span class="mdc-button__label">OK</span>
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <script>
+        document.querySelectorAll('.mdc-button').forEach(element => {
+            mdc.ripple.MDCRipple.attachTo(element)
+        });
+        document.querySelectorAll('.mdc-icon-button').forEach(element => {
+            //mdc.ripple.MDCRipple.attachTo(element)
+        });
+        document.querySelectorAll('.mdc-text-field').forEach(element => {
+            mdc.textField.MDCTextField.attachTo(element)
+        });
+        document.querySelectorAll('.mdc-deprecated-list-item').forEach(element => {
+            mdc.ripple.MDCRipple.attachTo(element)
+        });
+        document.querySelectorAll('.mdc-list-item').forEach(element => {
+            mdc.ripple.MDCRipple.attachTo(element)
+        });
+
+        var stuInfoEls = {
+            ID: new mdc.textField.MDCTextField(document.querySelector('#stuID')),
+            grade: new mdc.textField.MDCTextField(document.querySelector('#stuGrade')),
+            name: new mdc.textField.MDCTextField(document.querySelector('#stuName')),
+            gender: new mdc.select.MDCSelect(document.querySelector('#stuGender')),
+            pro: new mdc.textField.MDCTextField(document.querySelector('#stuPro')),
+            class: new mdc.textField.MDCTextField(document.querySelector('#stuClass')),
+            phone: new mdc.textField.MDCTextField(document.querySelector('#stuPhone')),
+            WeChat: new mdc.textField.MDCTextField(document.querySelector('#stuWeChat')),
+            intro1: new mdc.textField.MDCTextField(document.querySelector('#stuIntro1')),
+            intro2: new mdc.textField.MDCTextField(document.querySelector('#stuIntro2')),
+            intro3: new mdc.textField.MDCTextField(document.querySelector('#stuIntro3')),
+            awards: new mdc.textField.MDCTextField(document.querySelector('#stuAwards')),
+            notes: new mdc.textField.MDCTextField(document.querySelector('#stuNotes')),
+        }
+
+        var submitConfirmDialog = new mdc.dialog.MDCDialog(document.querySelector('#submitConfirmDialog'))
+        var snackbar = new mdc.snackbar.MDCSnackbar(document.querySelector('.mdc-snackbar'));
+    </script>
+    <script src="index.js"></script>
+
+</body>
+
+</html>

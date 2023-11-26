@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Achobeta面试反馈</title>
+
+    <link rel="stylesheet" href="material/material-components-web.min.css">
+    <link rel="stylesheet" href="material/icon.css">
+    <script src="material/material-components-web.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #pages>* {
+            display: none;
+        }
+
+        #commonFeedback {
+            display: block;
+        }
+
+
+        #message {
+            margin: 16px;
+            padding: 12px;
+            border-radius: 16px;
+            background-color: rgba(0, 0, 0, 0.08);
+        }
+
+        #message p {
+            margin: 0;
+        }
+
+        #buttonsContainer {
+            width: 100%;
+            display: table;
+            text-align: center;
+        }
+
+        #buttonsContainer button {
+            margin: 1%;
+        }
+
+        #speicalFeedback {
+            text-align: center;
+        }
+
+        #finishPage {
+            /*display: flex;*/
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100vh;
+            text-align: center;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h1 class="mdc-typography--headline5" style="display: none;">Achobeta面试反馈</h1>
+
+    <div id="pages">
+
+        <div id="commonFeedback">
+
+            <p id="wxcode" style="text-align: center; display: none;"></p>
+
+            <div id="message" class="mdc-typography mdc-typography--headline6">
+                <p style="margin-bottom: 16px; text-align: center;">正在加载</p>
+                <p>正在加载</p>
+            </div>
+
+            <div id="buttonsContainer">
+                <button id="enterFormButton" class="mdc-button mdc-button--outlined" style="width: 39%; color: red;"
+                    onclick="rejectDialog.open()">
+                    <div class="mdc-button__ripple"></div>
+                    <span class="mdc-button__label">拒绝</span>
+                </button>
+
+                <button id="enterFormButton" class="mdc-button mdc-button--raised" style="width: 39%;"
+                    onclick="acceptDialog.open()">
+                    <div class="mdc-button__ripple"></div>
+                    <span class="mdc-button__label">接受</span>
+                </button>
+
+                <button id="enterFormButton" class="mdc-button mdc-button--outlined" style="width: 80%;" onclick="
+                        document.getElementById('commonFeedback').style.display = 'none';
+                        document.getElementById('speicalFeedback').style.display = 'block';
+                    ">
+                    <div class="mdc-button__ripple"></div>
+                    <span class="mdc-button__label">特殊情况点我上报</span>
+                </button>
+            </div>
+
+            <select id="BEAddress" style="margin: 24px; display: none;" onchange='
+                if (this.selectedIndex == 3) {
+                    customBEAddr = window.prompt("Enter the backend address, e.g. \"http\:\/\/myserver.com\"", "http\:\/\/")
+                    if (customBEAddr !== null) {
+                        var el = document.createElement("option")
+                        el.value = customBEAddr
+                        el.innerHTML = customBEAddr
+                        this.appendChild(el)
+                        this.value = customBEAddr
+                    } else {
+                        this.selectedIndex = 0
+                    }
+                }'>
+                <option value="api">api/</option>
+                <option value="http://haojiezhe12345.top:8090/api">haojiezhe12345.top:8090/api/</option>
+                <option value="http://localhost:8080">localhost:8080</option>
+                <option>- custom -</option>
+            </select>
+
+        </div>
+
+        <div id="speicalFeedback">
+
+            <label id="specialNotes" class="mdc-text-field mdc-text-field--filled mdc-text-field--textarea"
+                style="width: 85%; margin: 16px 0;">
+                <span class="mdc-text-field__ripple"></span>
+                <span class="mdc-floating-label">请输入你遇到的问题</span>
+                <span class="mdc-text-field__resizer">
+                    <textarea class="mdc-text-field__input" rows="5" cols="40" placeholder="描述问题，如推迟面试时间等"></textarea>
+                </span>
+                <span class="mdc-line-ripple"></span>
+            </label>
+
+            <div id="buttonsContainer">
+                <button id="enterFormButton" class="mdc-button mdc-button--outlined" style="width: 39%;" onclick="
+                        document.getElementById('commonFeedback').style.display = 'block';
+                        document.getElementById('speicalFeedback').style.display = 'none';
+                    ">
+                    <div class="mdc-button__ripple"></div>
+                    <span class="mdc-button__label">取消</span>
+                </button>
+
+                <button id="enterFormButton" class="mdc-button mdc-button--raised" style="width: 39%;"
+                    onclick="specialDialog.open()">
+                    <div class="mdc-button__ripple"></div>
+                    <span class="mdc-button__label">发送</span>
+                </button>
+            </div>
+
+        </div>
+
+        <div id="finishPage">
+            <div>
+                <i class="material-icons" style="font-size: 64px; color: limegreen;">done</i>
+                <h1 class="mdc-typography mdc-typography--headline6" id="finishMsg">提交成功<br>期待与你相遇</h1>
+                <button class="mdc-button mdc-button--outlined" onclick="
+                        document.getElementById('commonFeedback').style.display = 'block';
+                        document.getElementById('finishPage').style.display = 'none'
+                    ">
+                    <span class="mdc-button__ripple"></span>
+                    <span class="mdc-button__label">完成</span>
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="rejectDialog" class="mdc-dialog">
+        <div class="mdc-dialog__container">
+            <div class="mdc-dialog__surface" role="alertdialog" aria-modal="true" aria-labelledby="my-dialog-title"
+                aria-describedby="my-dialog-content">
+                <div class="mdc-dialog__content" id="my-dialog-content">
+                    拒绝面试吗?
+                </div>
+                <div class="mdc-dialog__actions">
+                    <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="cancel">
+                        <div class="mdc-button__ripple"></div>
+                        <span class="mdc-button__label">取消</span>
+                    </button>
+                    <button type="button" class="mdc-button mdc-dialog__button mdc-button--raised"
+                        style="background-color: red;" data-mdc-dialog-action="ok" onclick="sendFeedback(0)">
+                        <div class="mdc-button__ripple"></div>
+                        <span class="mdc-button__label">确定</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="mdc-dialog__scrim"></div>
+    </div>
+
+    <div id="acceptDialog" class="mdc-dialog">
+        <div class="mdc-dialog__container">
+            <div class="mdc-dialog__surface" role="alertdialog" aria-modal="true" aria-labelledby="my-dialog-title"
+                aria-describedby="my-dialog-content">
+                <div class="mdc-dialog__content" id="my-dialog-content">
+                    确定接受面试?
+                </div>
+                <div class="mdc-dialog__actions">
+                    <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="cancel">
+                        <div class="mdc-button__ripple"></div>
+                        <span class="mdc-button__label">取消</span>
+                    </button>
+                    <button type="button" class="mdc-button mdc-dialog__button mdc-button--raised"
+                        data-mdc-dialog-action="ok" onclick="sendFeedback(1)">
+                        <div class="mdc-button__ripple"></div>
+                        <span class="mdc-button__label">确定</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="mdc-dialog__scrim"></div>
+    </div>
+
+    <div id="specialDialog" class="mdc-dialog">
+        <div class="mdc-dialog__container">
+            <div class="mdc-dialog__surface" role="alertdialog" aria-modal="true" aria-labelledby="my-dialog-title"
+                aria-describedby="my-dialog-content">
+                <div class="mdc-dialog__content" id="my-dialog-content">
+                    确定上报特殊情况?
+                </div>
+                <div class="mdc-dialog__actions">
+                    <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="cancel">
+                        <div class="mdc-button__ripple"></div>
+                        <span class="mdc-button__label">取消</span>
+                    </button>
+                    <button type="button" class="mdc-button mdc-dialog__button mdc-button--raised"
+                        data-mdc-dialog-action="ok" onclick="sendFeedback(2)">
+                        <div class="mdc-button__ripple"></div>
+                        <span class="mdc-button__label">确定</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="mdc-dialog__scrim"></div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.mdc-button').forEach(element => {
+            mdc.ripple.MDCRipple.attachTo(element)
+        });
+        document.querySelectorAll('.mdc-text-field').forEach(element => {
+            mdc.textField.MDCTextField.attachTo(element)
+        });
+        var specialNotes = new mdc.textField.MDCTextField(document.querySelector('#specialNotes'));
+
+        var rejectDialog = new mdc.dialog.MDCDialog(document.querySelector('#rejectDialog'))
+        var acceptDialog = new mdc.dialog.MDCDialog(document.querySelector('#acceptDialog'))
+        var specialDialog = new mdc.dialog.MDCDialog(document.querySelector('#specialDialog'))
+    </script>
+    <script>
+        async function sendFeedback(option) {
+            var obj = {
+                code: wxcode,
+                special: (option == 2) ? specialNotes.value : null,
+                stuSelect: option
+            }
+            console.log(obj)
+
+            var sendFeedbackResponse = await new Promise(function (resolve, reject) {
+                var xhr = new XMLHttpRequest();
+                xhr.open("PUT", `${document.getElementById('BEAddress').value}/feedback`);
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.onload = function () {
+                    if (xhr.readyState == 4) {
+                        resolve(xhr.responseText)
+                    }
+                };
+                xhr.onerror = function (e) {
+                    resolve(xhr.statusText)
+                }
+                xhr.send(JSON.stringify(obj));
+            })
+            console.log(sendFeedbackResponse)
+
+            if (JSON.parse(sendFeedbackResponse).code === 1) {
+                if (option == 0) {
+                    document.getElementById('finishMsg').innerHTML = '已拒绝<br>期待下次相遇'
+                }
+                else if (option == 1) {
+                    document.getElementById('finishMsg').innerHTML = '提交成功<br>期待与您相遇'
+                }
+                else if (option == 2) {
+                    document.getElementById('finishMsg').innerHTML = '提交成功<br>我们会尽快联系您'
+                }
+                document.getElementById('commonFeedback').style.display = 'none';
+                document.getElementById('speicalFeedback').style.display = 'none';
+                document.getElementById('finishPage').style.display = 'flex'
+            } else {
+                if (window.confirm(sendFeedbackResponse)) {
+                    location.replace('feedback.html')
+                }
+            }
+        }
+
+        function getQueryParam(param) {
+            return new URLSearchParams(window.location.search).get(param);
+        }
+
+        var wxcode = getQueryParam('code')
+
+        if (wxcode != null && wxcode != '') {
+            document.getElementById('wxcode').innerHTML = 'wx_login_code = ' + wxcode;
+
+            (async () => {
+                var loadUserInfoResponse = await new Promise(function (resolve, reject) {
+                    var xhr = new XMLHttpRequest()
+                    xhr.open("GET", `${document.getElementById('BEAddress').value}/getFeedbackInfo?code=${wxcode}`);
+                    xhr.onload = function () {
+                        if (xhr.readyState == 4) {
+                            resolve(xhr.responseText)
+                        }
+                    };
+                    xhr.send();
+                })
+                console.log(loadUserInfoResponse);
+
+                var loadUserInfoResponseJSON = JSON.parse(loadUserInfoResponse)
+
+                if (loadUserInfoResponseJSON.code !== 1) location.replace('feedback.html')
+
+                document.getElementById('message').children[0].innerHTML = loadUserInfoResponseJSON.data.historyTitle
+                document.getElementById('message').children[1].innerHTML = loadUserInfoResponseJSON.data.historyContext
+            })();
+
+        } else {
+            location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx061e13206be82d88&redirect_uri=http://ab.haojiezhe12345.top:8090/feedback.html&response_type=code&scope=snsapi_userinfo#wechat_redirect`;
+        }
+    </script>
+</body>
+
+</html>
